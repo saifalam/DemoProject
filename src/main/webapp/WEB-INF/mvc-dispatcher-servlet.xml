@@ -27,6 +27,7 @@
     <!--<mvc:resources mapping="/contents/**" location="/contents/css/"/>-->
     <!--<mvc:resources mapping="/contents/**" location="/contents/images/"/>-->
 
+    <!--default viewResolver-->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
         <!--<property name="prefix" value="/WEB-INF/pages/**"/>-->
         <!--<property name="suffix" value=".jsp"/>-->
