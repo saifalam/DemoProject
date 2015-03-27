@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ public class UserRegistrationViewModel {
     @NotNull
     private String fullName;
 
-    @NotNull
+    @NotNull @Size(min = 5,max = 20)
     private String userName;
 
     @NotNull

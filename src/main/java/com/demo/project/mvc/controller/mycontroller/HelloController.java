@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HelloController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(Model model) {
-		model.addAttribute("message", "this is Example with Tiles & MVC.");
+		model.addAttribute("message", "This is Example with Tiles & MVC.");
 		return "hello";
 	}
 }

@@ -42,8 +42,10 @@
      <%--<tiles:insertAttribute name="menu" />--%>
      <!-- Insert main content -->
      <tiles:insertAttribute name="content" />
+     <!-- Insert footer content -->
+     <tiles:insertAttribute name="footer" />
    </div>
-   <tiles:insertAttribute name="footer" />
+
 
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="/contents/framework/js/bootstrap.js"></script>

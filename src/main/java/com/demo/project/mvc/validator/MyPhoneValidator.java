@@ -14,13 +14,13 @@ public class MyPhoneValidator implements ConstraintValidator<Phone,String> {
     }
 
     @Override
-    public boolean isValid(String phoneNo, ConstraintValidatorContext cVCxt) {
+    public boolean isValid(String mobileNo, ConstraintValidatorContext cVCxt) {
 
-        if(phoneNo== null || phoneNo.isEmpty()){
+        if(mobileNo== null || mobileNo.isEmpty()){
             return false;
         }
 
-        if (phoneNo.matches("\\d{11}")){
+        if (mobileNo.matches("\\d{11}")){
             return true;
         }
         else

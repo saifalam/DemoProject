@@ -4,3 +4,22 @@
 .leftAlign{
 
 }
+.signInPart{
+    width: 64%;
+    padding-left: 40%;
+}
+
+.signUpPart{
+    width: 70%;
+    padding-left: 30%;
+    padding-top: 7%;
+}
+.footer{
+    padding-left: 46%;
+}
+
+.error {
+    color: #ff0000;
+    font-style: italic;
+    font-weight: bold;
+}

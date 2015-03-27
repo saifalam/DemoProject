@@ -17,15 +17,15 @@
       <a class="navbar-brand" href="#">Demo Project</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <form class="navbar-form navbar-right">
+      <form class="navbar-form navbar-right" action="/registration">
         <%--<div class="form-group">--%>
-          <%--<input placeholder="Email" class="form-control" type="text">--%>
+        <%--<input placeholder="Email" class="form-control" type="text">--%>
         <%--</div>--%>
         <%--<div class="form-group">--%>
-          <%--<input placeholder="Password" class="form-control" type="password">--%>
+        <%--<input placeholder="Password" class="form-control" type="password">--%>
         <%--</div>--%>
-        <button type="submit" class="btn btn-success">Sign in</button>
-          <button type="submit" class="btn btn-danger">Sign up</button>
+        <button id="bSignIn" type="button" class="btn btn-success">Sign in</button>
+        <button id="bSignUp" type="submit" class="btn btn-danger">Sign up</button>
       </form>
     </div><!--/.navbar-collapse -->
   </div>

@@ -5,9 +5,9 @@
   Time: 2:18 PM
   To change this template use File | Settings | File Templates.
 --%>
-<div>
+<div class="footer">
   <p>
-    © Demo Project- 2015
+    &copy; Demo Project- 2015
   </p>
 </div>
 

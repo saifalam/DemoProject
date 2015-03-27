@@ -1,6 +1,7 @@
 package com.demo.project.mvc.validator;
 
 import javax.validation.Constraint;
+import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
@@ -13,5 +14,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Phone {
 
-    String message() default"{Phone}";
+    String message() default"{mobileNo}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

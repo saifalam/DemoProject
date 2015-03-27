@@ -22,10 +22,6 @@
     <import resource="resource-beans/db-configuration.xml"/>
 
     <mvc:resources mapping="/contents/**" location="/contents/"/>
-    <!--<mvc:resources mapping="/contents/**" location="/contents/framework/js/"/>-->
-    <!--<mvc:resources mapping="/contents/**" location="/contents/js/"/>-->
-    <!--<mvc:resources mapping="/contents/**" location="/contents/css/"/>-->
-    <!--<mvc:resources mapping="/contents/**" location="/contents/images/"/>-->
 
     <!--default viewResolver-->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
