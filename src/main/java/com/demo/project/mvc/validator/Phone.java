@@ -9,12 +9,14 @@ import java.lang.annotation.*;
  */
 
 @Documented
-@Target(ElementType.FIELD)
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Constraint(validatedBy = MyPhoneValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Phone {
 
-    String message() default"{mobileNo}";
+   String message() default"Required 11 digits";
+
+//    String message() default "{Phone}";
 
     Class<?>[] groups() default {};
 
