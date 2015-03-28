@@ -14,10 +14,10 @@
   User Saved Successfully.
 </h3>
 
-<strong>Customer Name:${customer.email}</strong><br>
-<strong>Customer Name:${customer.userName}</strong><br>
-<strong>Customer Email:${customer.email}</strong><br>
-<strong>Customer Gender:${customer.gender}</strong><br>
-<strong>Customer Birthday:<fmt:formatDate value="${customer.dateOfBirth}" type="date" /></strong><br>
+<strong>Full Name:${viewModel.fullName}</strong><br>
+<strong>User Name:${viewModel.userName}</strong><br>
+<strong>User Email:${viewModel.email}</strong><br>
+<strong>User Gender:${viewModel.gender}</strong><br>
+<strong>User Birthday:<fmt:formatDate value="${viewModel.dateOfBirth}" type="date" /></strong><br>
 
 

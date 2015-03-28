@@ -1,6 +1,6 @@
 
 
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div id="content_main" class="row">
 	<%--<nav class="navbar navbar-inverse navbar-fixed-top">--%>
