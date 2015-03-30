@@ -1,5 +1,8 @@
 package com.demo.project.mvc.common.service.authentication;
 
+import com.demo.project.mvc.common.repository.authentication.AuthenticationRepository;
+import com.demo.project.mvc.model.entitymodel.UserRegistrationEntityModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -14,6 +17,8 @@ import javax.transaction.Transactional;
 @Transactional
 public class UserAuthenticationService implements AuthenticationProvider {
 
+    @Autowired
+    AuthenticationRepository authenticationRepository;
     private String ROLE_USER = "ROLE_USER";
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -21,6 +26,12 @@ public class UserAuthenticationService implements AuthenticationProvider {
         if(authentication.getName()!=null && authentication.getCredentials()!=null){
             String username= authentication.getName();
             String password= authentication.getCredentials().toString();
+           // double  userId= authenticationRepository.getAllByUserName(username);
+            UserRegistrationEntityModel registrationEntityModel=authenticationRepository.getAllByUserName(username);
+
+            if(registrationEntityModel != null && registrationEntityModel.getId()!= 0){
+
+            }
 
 
 

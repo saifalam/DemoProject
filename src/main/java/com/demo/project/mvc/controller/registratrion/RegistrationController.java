@@ -1,13 +1,15 @@
 package com.demo.project.mvc.controller.registratrion;
 
+import com.demo.project.mvc.model.entitymodel.UserRegistrationEntityModel;
 import com.demo.project.mvc.model.viewmodel.UserRegistrationViewModel;
+import com.demo.project.mvc.service.UserRegistrationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.validation.Valid;
 
 /**
@@ -16,6 +18,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/")
 public class RegistrationController {
+
+    @Autowired
+    UserRegistrationService registrationService;
 
     @RequestMapping( value = "registration",method = RequestMethod.GET)
     public String getRegistration(Model model) {
@@ -26,12 +31,14 @@ public class RegistrationController {
 
     @RequestMapping( value = "registration", method = RequestMethod.POST)
     public String makeRegistration(Model model, @ModelAttribute("viewModel")@Valid UserRegistrationViewModel viewModel, BindingResult result) {
-       if(result.hasErrors()){
+       if(result!= null || result.hasErrors()){
            model.addAttribute("viewModel", viewModel);
            return "registrationForm";
        }
 
-        if(result!= null){
+        if(viewModel!= null){
+            UserRegistrationEntityModel registrationEntityModel= registrationService.getUserRegistrationEntityModelFromViewModel(viewModel);
+            registrationService.createRegisterUser(registrationEntityModel);
             model.addAttribute("viewModel", viewModel);
             return "registrationSuccess";
         }
@@ -39,4 +46,5 @@ public class RegistrationController {
         model.addAttribute("viewModel", viewModel);
         return "registrationForm";
     }
+
 }
