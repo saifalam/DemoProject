@@ -16,7 +16,7 @@ public class HomeController {
 		return "hello";
 	}
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String getHome(Model model) {
         model.addAttribute("message", "This is Example with Tiles & MVC.");
         return "hello";
