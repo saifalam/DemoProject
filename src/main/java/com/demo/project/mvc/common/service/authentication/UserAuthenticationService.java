@@ -1,6 +1,7 @@
 package com.demo.project.mvc.common.service.authentication;
 
 import com.demo.project.mvc.common.repository.authentication.AuthenticationRepository;
+import com.demo.project.mvc.model.datamodel.LoginUser;
 import com.demo.project.mvc.model.entitymodel.UserRegistrationEntityModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -27,7 +28,7 @@ public class UserAuthenticationService implements AuthenticationProvider {
             String username= authentication.getName();
             String password= authentication.getCredentials().toString();
            // double  userId= authenticationRepository.getAllByUserName(username);
-            UserRegistrationEntityModel registrationEntityModel=authenticationRepository.getAllByUserName(username);
+            LoginUser loginUser =authenticationRepository.getLoginUserByName(username);
 
             if(registrationEntityModel != null && registrationEntityModel.getId()!= 0){
 
