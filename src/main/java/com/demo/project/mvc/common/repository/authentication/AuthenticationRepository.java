@@ -4,6 +4,7 @@ import com.demo.project.mvc.common.repository.BaseRepository;
 import com.demo.project.mvc.model.datamodel.LoginUser;
 import com.demo.project.mvc.model.entitymodel.UserRegistrationEntityModel;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.hibernate.type.StandardBasicTypes;
@@ -38,9 +39,9 @@ public class AuthenticationRepository extends BaseRepository<UserRegistrationEnt
 
     public LoginUser getLoginUserByName(String username) {
         Session session = getSession();
-        List<LoginUser> loginUser = session.createSQLQuery("SELECT ur.id as id, ur.full_name as fullName,ur.gender as gender," +
-                "ur.phone as mobileNo,ur.email as email, ur.dob as dateOfBirth, ath user_password as password" +
-                " FROM user_registration ur join authentication ath WHERE ath.is_active= Y and ur.user_name = " + username + ";")
+        Query query = session.createSQLQuery("SELECT ur.id as id, ur.full_name as fullName, ur.gender as gender," +
+                "ur.phone as mobileNo,ur.email as email, ur.dob as dateOfBirth, ath.user_password as password" +
+                " FROM user_registration ur join authentication ath WHERE ath.is_active= :isActive and ur.user_name = " + username)
                 .addScalar("id", StandardBasicTypes.INTEGER)
                 .addScalar("password", StandardBasicTypes.STRING)
                 .addScalar("fullName", StandardBasicTypes.STRING)
@@ -49,9 +50,11 @@ public class AuthenticationRepository extends BaseRepository<UserRegistrationEnt
                 .addScalar("mobileNo", StandardBasicTypes.STRING)
                 .addScalar("email", StandardBasicTypes.STRING)
                 .addScalar("dateOfBirth", StandardBasicTypes.DATE)
-                .setResultTransformer(new AliasToBeanResultTransformer(LoginUser.class))
-                .list();
-        
-        return loginUser;
+                .setMaxResults(1)
+                .setResultTransformer(new AliasToBeanResultTransformer(LoginUser.class));
+        query.setParameter("isActive",1);
+
+
+        return (LoginUser)query.uniqueResult();
     }
 }

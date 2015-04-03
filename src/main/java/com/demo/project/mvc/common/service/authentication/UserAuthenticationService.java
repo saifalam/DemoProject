@@ -30,7 +30,11 @@ public class UserAuthenticationService implements AuthenticationProvider {
            // double  userId= authenticationRepository.getAllByUserName(username);
             LoginUser loginUser =authenticationRepository.getLoginUserByName(username);
 
-            if(registrationEntityModel != null && registrationEntityModel.getId()!= 0){
+            if(loginUser != null && loginUser.getPassword()!=null && !loginUser.getPassword().isEmpty()){
+
+                if(loginUser.getPassword().equals(password)){
+                   
+                }
 
             }
 
