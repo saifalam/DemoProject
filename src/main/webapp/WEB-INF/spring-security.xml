@@ -9,17 +9,22 @@
 
        <security:http use-expressions="true" auto-config="true" authentication-manager-ref="UserAuthenticationManager" pattern="/**">
 
-              <security:form-login login-page="/login"
-                                   default-target-url="/login/success"
-                                   username-parameter="username"
-                                   password-parameter="password"
-                                   authentication-failure-url="/login/error" />
+              <!--<security:form-login login-page="/login"-->
+                                   <!--default-target-url="/login/success"-->
+                                   <!--username-parameter="username"-->
+                                   <!--password-parameter="password"-->
+                                   <!--authentication-failure-url="/login/error" />-->
 
               <security:logout
                       logout-success-url="/logout/success"/>
 
               <security:intercept-url pattern="/adminpage**" access="ROLE_USER"/>
               <security:intercept-url pattern="/adminpage**" access="ROLE_USER"/>
+
+              <security:form-login login-page='/login.html'
+                      authentication-failure-url="/login.html?error=true" authentication-success-handler-ref="AuthenticationSuccess"/>
+
+
        </security:http>
 
        <security:authentication-manager id="UserAuthenticationManager">
@@ -28,6 +33,7 @@
        </security:authentication-manager>
 
        <bean id="UserAuthenticationProvider" class="com.demo.project.mvc.common.service.authentication.UserAuthenticationService"/>
+       <bean id="AuthenticationSuccess" class="com.demo.project.mvc.common.service.authentication.UserAuthenticationSuccess"/>
 
 
 
