@@ -2,6 +2,7 @@ package com.demo.project.mvc.common.service.authentication;
 
 import com.demo.project.mvc.common.repository.authentication.AuthenticationRepository;
 import com.demo.project.mvc.model.datamodel.LoginUser;
+import com.demo.project.mvc.repository.UserRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,6 +18,9 @@ public class UserAuthenticationService implements AuthenticationProvider  {
 
     @Autowired
     AuthenticationRepository authenticationRepository;
+
+    @Autowired
+    UserRegistrationRepository userRegistrationRepository;
     private String ROLE_USER = "ROLE_USER";
 
     @Override
@@ -27,7 +31,7 @@ public class UserAuthenticationService implements AuthenticationProvider  {
                   String username= authentication.getName();
                   String password= authentication.getCredentials().toString();
                  // double  userId= authenticationRepository.getAllByUserName(username);
-                  LoginUser loginUser =authenticationRepository.getLoginUserByName(username);
+                  LoginUser loginUser =userRegistrationRepository.getLoginUserByName(username);
 
                 if(loginUser != null && loginUser.getPassword()!=null && !loginUser.getPassword().isEmpty()){
 

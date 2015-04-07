@@ -1,6 +1,5 @@
 package com.demo.project.mvc.controller.registratrion;
 
-import com.demo.project.mvc.model.entitymodel.UserRegistrationEntityModel;
 import com.demo.project.mvc.model.viewmodel.UserRegistrationViewModel;
 import com.demo.project.mvc.service.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +36,10 @@ public class RegistrationController {
        }
 
         if(viewModel!= null){
-            UserRegistrationEntityModel registrationEntityModel= registrationService.getUserRegistrationEntityModelFromViewModel(viewModel);
-            registrationService.createRegisterUser(registrationEntityModel);
+            registrationService.doRegistration(viewModel);
             model.addAttribute("viewModel", viewModel);
             return "registrationSuccess";
         }
-
         model.addAttribute("viewModel", viewModel);
         return "registrationForm";
     }

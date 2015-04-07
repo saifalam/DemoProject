@@ -21,3 +21,4 @@
 <strong>User Birthday:<fmt:formatDate value="${viewModel.dateOfBirth}" type="date" /></strong><br>
 
 
+

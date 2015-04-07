@@ -33,7 +33,7 @@
 	</div>
 
 	<div class="signInPart">
-		<form class="form-signin">
+		<form class="form-signin" action="/j_spring_security_check">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="inputUsername" class="sr-only">Username</label>
 			<input id="inputUserName" class="form-control" placeholder="Username" required="" autofocus="" type="text">

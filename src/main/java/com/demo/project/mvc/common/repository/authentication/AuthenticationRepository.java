@@ -2,6 +2,7 @@ package com.demo.project.mvc.common.repository.authentication;
 
 import com.demo.project.mvc.common.repository.BaseRepository;
 import com.demo.project.mvc.model.datamodel.LoginUser;
+import com.demo.project.mvc.model.entitymodel.AuthenticationEntityModel;
 import com.demo.project.mvc.model.entitymodel.UserRegistrationEntityModel;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by saif on 3/30/15.
  */
 @Repository
-public class AuthenticationRepository extends BaseRepository<UserRegistrationEntityModel> {
+public class AuthenticationRepository extends BaseRepository<AuthenticationEntityModel> {
 
 //    public double getAllByUserName(String username) {
 //
@@ -28,33 +29,5 @@ public class AuthenticationRepository extends BaseRepository<UserRegistrationEnt
 //        return obj != null ? (Double) obj : 0;
 //    }
 
-    public UserRegistrationEntityModel getAllByUserName(String userName) {
 
-        Session session = getSession();
-        Query query = session.createQuery("FROM UserRegistrationEntityModel  WHERE userName = :userName");
-        query.setParameter("userName",userName);
-        return (UserRegistrationEntityModel) query.uniqueResult();
-    }
-
-
-    public LoginUser getLoginUserByName(String username) {
-        Session session = getSession();
-        Query query = session.createSQLQuery("SELECT ur.id as id, ur.full_name as fullName, ur.gender as gender," +
-                "ur.phone as mobileNo,ur.email as email, ur.dob as dateOfBirth, ath.user_password as password" +
-                " FROM user_registration ur join authentication ath WHERE ath.is_active= :isActive and ur.user_name = " + username)
-                .addScalar("id", StandardBasicTypes.INTEGER)
-                .addScalar("password", StandardBasicTypes.STRING)
-                .addScalar("fullName", StandardBasicTypes.STRING)
-                .addScalar("userName", StandardBasicTypes.STRING)
-                .addScalar("gender", StandardBasicTypes.STRING)
-                .addScalar("mobileNo", StandardBasicTypes.STRING)
-                .addScalar("email", StandardBasicTypes.STRING)
-                .addScalar("dateOfBirth", StandardBasicTypes.DATE)
-                .setMaxResults(1)
-                .setResultTransformer(new AliasToBeanResultTransformer(LoginUser.class));
-        query.setParameter("isActive",1);
-
-
-        return (LoginUser)query.uniqueResult();
-    }
 }
