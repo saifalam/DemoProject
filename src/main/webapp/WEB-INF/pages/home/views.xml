@@ -4,7 +4,7 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <definition name="home" extends="defaultTemplate">
-        <put-attribute name="content" value="/WEB-INF/pages/mypage/hello.jsp" />
+        <put-attribute name="content" value="/WEB-INF/pages/home/home.jsp" />
     </definition>
 
 </tiles-definitions>

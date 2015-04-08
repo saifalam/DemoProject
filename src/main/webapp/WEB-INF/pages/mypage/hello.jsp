@@ -33,12 +33,12 @@
 	</div>
 
 	<div class="signInPart">
-		<form class="form-signin" action="/j_spring_security_check">
+		<form class="form-signin" method="POST" action="/j_spring_security_check">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="inputUsername" class="sr-only">Username</label>
-			<input id="inputUserName" class="form-control" placeholder="Username" required="" autofocus="" type="text">
+			<input id="inputUserName" class="form-control" name="j_username" placeholder="Username" required="" autofocus="" type="text">
 			<label for="inputPassword" class="sr-only">Password</label>
-			<input id="inputPassword" class="form-control" placeholder="Password" required="" type="password">
+			<input id="inputPassword" class="form-control" name="j_password" placeholder="Password" required="" type="password">
 			<div class="checkbox">
 				<label>
 					<input value="remember-me" type="checkbox"> Remember me

@@ -1,6 +1,7 @@
-package com.demo.project.mvc.common.service.authentication;
+package com.demo.project.mvc.common.provider;
 
 import com.demo.project.mvc.common.repository.authentication.AuthenticationRepository;
+import com.demo.project.mvc.common.service.authentication.UserAuthenticationService;
 import com.demo.project.mvc.model.datamodel.LoginUser;
 import com.demo.project.mvc.repository.UserRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +10,14 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
-
 
 /**
- * Created by saif on 3/20/15.
+ * Created by saif on 4/8/15.
  */
-public class UserAuthenticationService implements AuthenticationProvider  {
+public class UserAuthenticationProvider  implements AuthenticationProvider {
 
     @Autowired
-    AuthenticationRepository authenticationRepository;
+    UserAuthenticationService userAuthenticationService;
 
     @Autowired
     UserRegistrationRepository userRegistrationRepository;
@@ -30,11 +27,12 @@ public class UserAuthenticationService implements AuthenticationProvider  {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         if(authentication.getName()!=null && authentication.getCredentials()!=null){
+            userAuthenticationService.serveAuthService(authentication);
             try{
-                  String username= authentication.getName();
-                  String password= authentication.getCredentials().toString();
-                 // double  userId= authenticationRepository.getAllByUserName(username);
-                  LoginUser loginUser =userRegistrationRepository.getLoginUserByName(username);
+                String username= authentication.getName();
+                String password= authentication.getCredentials().toString();
+                // double  userId= authenticationRepository.getAllByUserName(username);
+                LoginUser loginUser =userRegistrationRepository.getLoginUserByName(username);
 
                 if(loginUser != null && loginUser.getPassword()!=null && !loginUser.getPassword().isEmpty()){
 
@@ -62,13 +60,10 @@ public class UserAuthenticationService implements AuthenticationProvider  {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
 
     }
-
-    public void serveAuthService(Authentication authentication) {
-
+}
+class AuthException extends AccountStatusException {
+    public AuthException(String msg) {
+        super(msg);
     }
 }
- class AuthException extends AccountStatusException{
-     public AuthException(String msg){
-         super(msg);
-     }
-}
+

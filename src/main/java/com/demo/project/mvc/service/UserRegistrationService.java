@@ -53,6 +53,7 @@ public class UserRegistrationService {
         registrationEntityModel.setEmail(viewModel.getEmail());
         registrationEntityModel.setDateOfBirth(viewModel.getDateOfBirth());
         registrationEntityModel.setGender(viewModel.getGender().toString());
+        registrationEntityModel.setMobileNo(viewModel.getMobileNo());
         return  registrationEntityModel;
     }
 
@@ -65,7 +66,7 @@ public class UserRegistrationService {
 
     private void assignPassword(UserRegistrationViewModel viewModel) {
 
-        long userId= this.getUserIdByUserName(viewModel.getUserName());
+        int userId= this.getUserIdByUserName(viewModel.getUserName());
 //        int minLen = passwordMinLength;
 //        int maxLen = passwordMaxLength;
 //        String generatedLoginPassword = RandomPasswordGenerator.generatePassword(minLen, maxLen);
@@ -88,7 +89,7 @@ public class UserRegistrationService {
         return entityModel;
     }
 
-    private long getUserIdByUserName(String userName) {
+    private int getUserIdByUserName(String userName) {
         return userRegistrationRepository.getUserIdByUserName( userName);
     }
 

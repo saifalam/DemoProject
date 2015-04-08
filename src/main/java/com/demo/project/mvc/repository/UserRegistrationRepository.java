@@ -9,17 +9,20 @@ import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by saif on 3/20/15.
  */
 @Repository
+@Transactional
 public class UserRegistrationRepository extends BaseRepository<UserRegistrationEntityModel> {
 
-    public long getUserIdByUserName(String userName) {
+    public int getUserIdByUserName(String userName) {
         Session session=getSession();
         Query query= session.createQuery("SELECT ure.id FROM UserRegistrationEntityModel ure WHERE ure.userName= :userName ");
         query.setParameter("userName",userName);
-        return (Long)query.uniqueResult();
+        return (Integer)query.uniqueResult();
     }
 
     public UserRegistrationEntityModel getAllByUserName(String userName) {

@@ -30,10 +30,10 @@ public class RegistrationController {
 
     @RequestMapping( value = "registration", method = RequestMethod.POST)
     public String makeRegistration(Model model, @ModelAttribute("viewModel")@Valid UserRegistrationViewModel viewModel, BindingResult result) {
-       if(result!= null || result.hasErrors()){
-           model.addAttribute("viewModel", viewModel);
-           return "registrationForm";
-       }
+//       if(result!= null || result.hasErrors()){
+//           model.addAttribute("viewModel", viewModel);
+//           return "registrationForm";
+//       }
 
         if(viewModel!= null){
             registrationService.doRegistration(viewModel);
