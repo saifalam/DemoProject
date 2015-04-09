@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
 
 @Controller
 @RequestMapping("/")
@@ -25,8 +26,9 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String getHome(Model model) {
+    public String getHome(Model model,WebRequest request) {
         model.addAttribute("message", "This is Home page of Demo project.");
+        //model.addAttribute("viewModel", request);
         return "home";
     }
 

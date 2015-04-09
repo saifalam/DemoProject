@@ -25,7 +25,7 @@
               <security:authentication-provider ref="UserAuthenticationProvider"/>
        </security:authentication-manager>
 
-       <bean id="UserAuthenticationProvider" class="com.demo.project.mvc.common.service.authentication.UserAuthenticationService"/>
-       <bean id="AuthenticationSuccess" class="com.demo.project.mvc.common.service.authentication.UserAuthenticationSuccess"/>
+       <bean id="UserAuthenticationProvider" class="com.demo.project.mvc.common.provider.UserAuthenticationProvider"/>
+       <bean id="AuthenticationSuccess" class="com.demo.project.mvc.common.provider.UserAuthenticationSuccess"/>
 
 </beans>

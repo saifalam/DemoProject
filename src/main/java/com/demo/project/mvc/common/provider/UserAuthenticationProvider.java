@@ -1,15 +1,19 @@
 package com.demo.project.mvc.common.provider;
 
-import com.demo.project.mvc.common.repository.authentication.AuthenticationRepository;
+import com.demo.project.mvc.common.encryptor.RandomEncryptor;
 import com.demo.project.mvc.common.service.authentication.UserAuthenticationService;
 import com.demo.project.mvc.model.datamodel.LoginUser;
-import com.demo.project.mvc.repository.UserRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by saif on 4/8/15.
@@ -20,24 +24,27 @@ public class UserAuthenticationProvider  implements AuthenticationProvider {
     UserAuthenticationService userAuthenticationService;
 
     @Autowired
-    UserRegistrationRepository userRegistrationRepository;
+    RandomEncryptor randomEncryptor;
+
     private String ROLE_USER = "ROLE_USER";
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         if(authentication.getName()!=null && authentication.getCredentials()!=null){
-            userAuthenticationService.serveAuthService(authentication);
             try{
                 String username= authentication.getName();
                 String password= authentication.getCredentials().toString();
                 // double  userId= authenticationRepository.getAllByUserName(username);
-                LoginUser loginUser =userRegistrationRepository.getLoginUserByName(username);
+                LoginUser loginUser =userAuthenticationService.getLoginUserByName(username);
+                List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
 
                 if(loginUser != null && loginUser.getPassword()!=null && !loginUser.getPassword().isEmpty()){
 
+                    loginUser.setPassword(randomEncryptor.decrypt(loginUser.getPassword()));
                     if(loginUser.getPassword().equals(password)){
-                        return new UsernamePasswordAuthenticationToken(loginUser,ROLE_USER);
+                        AUTHORITIES.add(new SimpleGrantedAuthority(ROLE_USER));
+                        return new UsernamePasswordAuthenticationToken(loginUser,"",AUTHORITIES);
                     }
                     else{
                         throw  new AuthException("Login username or password is not correct !!!.");

@@ -1,9 +1,10 @@
-package com.demo.project.mvc.common.service.authentication;
+package com.demo.project.mvc.common.provider;
 
 import com.demo.project.mvc.model.datamodel.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -14,6 +15,7 @@ import java.io.IOException;
 /**
  * Created by saif on 4/6/15.
  */
+@Component
 public class UserAuthenticationSuccess  extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -37,6 +39,12 @@ public class UserAuthenticationSuccess  extends SimpleUrlAuthenticationSuccessHa
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
+            request.getSession().setAttribute("userName", loginUser.getUserName());
+            request.getSession().setAttribute("fullName", loginUser.getFullName());
+            request.getSession().setAttribute("gender", loginUser.getGender());
+            request.getSession().setAttribute("mobileNo", loginUser.getMobileNo());
+            request.getSession().setAttribute("email", loginUser.getEmail());
+            request.getSession().setAttribute("dateOfBirth", loginUser.getDateOfBirth());
             redirectUrl="/home";
         }
         response.sendRedirect(redirectUrl);

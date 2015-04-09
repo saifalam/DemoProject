@@ -9,13 +9,10 @@ import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-
 /**
  * Created by saif on 3/20/15.
  */
 @Repository
-@Transactional
 public class UserRegistrationRepository extends BaseRepository<UserRegistrationEntityModel> {
 
     public int getUserIdByUserName(String userName) {
@@ -37,8 +34,8 @@ public class UserRegistrationRepository extends BaseRepository<UserRegistrationE
     public LoginUser getLoginUserByName(String username) {
         Session session = getSession();
         Query query = session.createSQLQuery("SELECT ur.id as id, ur.full_name as fullName, ur.gender as gender," +
-                "ur.phone as mobileNo,ur.email as email, ur.dob as dateOfBirth, ath.user_password as password" +
-                " FROM user_registration ur join authentication ath WHERE ath.is_active= :isActive and ur.user_name = " + username)
+                "ur.user_name as userName, ur.phone as mobileNo, ur.email as email, ur.dob as dateOfBirth, ath.user_password as password" +
+                " FROM user_registration ur join authentication ath WHERE ath.is_active= :isActive and ur.user_name = :username ")
                 .addScalar("id", StandardBasicTypes.INTEGER)
                 .addScalar("password", StandardBasicTypes.STRING)
                 .addScalar("fullName", StandardBasicTypes.STRING)
@@ -50,6 +47,7 @@ public class UserRegistrationRepository extends BaseRepository<UserRegistrationE
                 .setMaxResults(1)
                 .setResultTransformer(new AliasToBeanResultTransformer(LoginUser.class));
         query.setParameter("isActive",1);
+        query.setParameter("username",username);
 
 
         return (LoginUser)query.uniqueResult();
