@@ -11,13 +11,14 @@
 
               <security:intercept-url pattern="/contents/**"  access="permitAll"/>
               <security:intercept-url pattern="/login*" access="permitAll" />
+              <security:intercept-url pattern="/logout*" access="permitAll" />
               <security:intercept-url pattern="/home"  access="isAuthenticated()"/>
 
               <security:form-login login-page='/'
                                    authentication-failure-url='/login/error'
                                    authentication-success-handler-ref="AuthenticationSuccess"/>
               <security:logout
-                      logout-success-url="/logout/success"/>
+                      success-handler-ref="CustomLogoutSuccessHandler" invalidate-session="false"/>
 
        </security:http>
 
@@ -27,5 +28,6 @@
 
        <bean id="UserAuthenticationProvider" class="com.demo.project.mvc.common.provider.UserAuthenticationProvider"/>
        <bean id="AuthenticationSuccess" class="com.demo.project.mvc.common.provider.UserAuthenticationSuccess"/>
+       <bean id="CustomLogoutSuccessHandler" class="com.demo.project.mvc.common.provider.CustomLogoutSuccessHandler"/>
 
 </beans>

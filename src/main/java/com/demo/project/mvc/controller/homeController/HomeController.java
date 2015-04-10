@@ -26,7 +26,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String getHome(Model model,WebRequest request) {
+    public String getHome(Model model) {
         model.addAttribute("message", "This is Home page of Demo project.");
         //model.addAttribute("viewModel", request);
         return "home";
@@ -35,6 +35,12 @@ public class HomeController {
     @RequestMapping(value = "/login/error",method = RequestMethod.GET)
     public String loginSecurityError(Model model ) {
         model.addAttribute("message","Login failed with Spring security error... :(");
+        return "hello";
+    }
+
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    public String logout(Model model ) {
+        model.addAttribute("message","Logout successful with spring security");
         return "hello";
     }
 
