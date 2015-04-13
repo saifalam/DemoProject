@@ -1,6 +1,7 @@
 package com.demo.project.mvc.common.provider;
 
 import com.demo.project.mvc.model.datamodel.LoginUser;
+import com.demo.project.mvc.model.datamodel.TokenDataModel;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -25,7 +26,7 @@ public class UserAuthenticationSuccess  extends SimpleUrlAuthenticationSuccessHa
         String redirectUrl = "/";
         if (auth != null) {
 
-            LoginUser loginUser = ((LoginUser) auth.getPrincipal());
+            TokenDataModel loginUser = ((TokenDataModel) auth.getPrincipal());
             String userName = loginUser.getUserName();
             if (request.getParameter("_spring_security_remember_me") != null) {
 
@@ -40,11 +41,10 @@ public class UserAuthenticationSuccess  extends SimpleUrlAuthenticationSuccessHa
                 response.addCookie(cookie);
             }
             request.getSession().setAttribute("userName", loginUser.getUserName());
-            request.getSession().setAttribute("fullName", loginUser.getFullName());
-            request.getSession().setAttribute("gender", loginUser.getGender());
-            request.getSession().setAttribute("mobileNo", loginUser.getMobileNo());
-            request.getSession().setAttribute("email", loginUser.getEmail());
-            request.getSession().setAttribute("dateOfBirth", loginUser.getDateOfBirth());
+//            request.getSession().setAttribute("fullName", loginUser.getToken());
+//            request.getSession().setAttribute("gender", loginUser.getUserId());
+//            request.getSession().setAttribute("mobileNo", loginUser.getUserStatus());
+//            request.getSession().setAttribute("email", loginUser.getLoginMessage());
             redirectUrl="/home";
         }
         response.sendRedirect(redirectUrl);

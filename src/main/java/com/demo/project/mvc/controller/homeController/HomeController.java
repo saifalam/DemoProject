@@ -13,11 +13,11 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-//     @RequestMapping(method = RequestMethod.GET)
-//     public String printWelcome(Model model) {
-//         model.addAttribute("message", "This is Example with Tiles & MVC.");
-//         return "hello";
-//     }
+     @RequestMapping(method = RequestMethod.GET)
+     public String printWelcome(Model model) {
+         //model.addAttribute("message", "This is Example with Tiles & MVC.");
+         return "redirect:/login";
+     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String getLogin(Model model) {
@@ -34,7 +34,7 @@ public class HomeController {
 
     @RequestMapping(value = "/login/error",method = RequestMethod.GET)
     public String loginSecurityError(Model model ) {
-        model.addAttribute("message","Login failed with Spring security error... :(");
+        model.addAttribute("message","Login failed with Spring security error... :( ");
         return "hello";
     }
 

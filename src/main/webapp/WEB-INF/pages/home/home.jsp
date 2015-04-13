@@ -14,12 +14,11 @@
 
   <div class="welcomePart">
     <h1>${message}</h1>
-    <h2>Profile Description:</h2>
-    <h3>Full Name: ${sessionScope.fullName}</h3>
-    <h3>Email: ${sessionScope.email}</h3>
-    <h3>Mobile: ${sessionScope.mobileNo}</h3>
-    <h3>Gender: ${sessionScope.gender}</h3>
-    <h3>Date of birth: ${sessionScope.dateOfBirth}</h3>
+    <h3>User Name: ${sessionScope.userName}</h3>
+    <%--<h3>Email: ${sessionScope.email}</h3>--%>
+    <%--<h3>Mobile: ${sessionScope.mobileNo}</h3>--%>
+    <%--<h3>Gender: ${sessionScope.gender}</h3>--%>
+    <%--<h3>Date of birth: ${sessionScope.dateOfBirth}</h3>--%>
 
     <%--<c:if test="${pageContext['request'].userPrincipal != null}">--%>
       <%--<c:out value="${request.getUserPrincipal().getName()}" />--%>
