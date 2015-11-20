@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+       <security:http use-expressions="true" auto-config="true" authentication-manager-ref="UserAuthenticationManager" pattern="/**">
+
+              <security:intercept-url pattern="/contents/**"  access="permitAll"/>
+              <security:intercept-url pattern="/login*" access="permitAll" />
+              <security:intercept-url pattern="/logout*" access="permitAll" />
+              <security:intercept-url pattern="/home"  access="isAuthenticated()"/>
+
+              <security:form-login login-page='/'
+                                   authentication-failure-url='/login/error'
+                                   authentication-success-handler-ref="AuthenticationSuccess"/>
+              <security:logout
+                      success-handler-ref="CustomLogoutSuccessHandler" invalidate-session="false"/>
+
+       </security:http>
+
+       <security:authentication-manager id="UserAuthenticationManager">
+              <security:authentication-provider ref="UserAuthenticationProvider"/>
+       </security:authentication-manager>
+
+       <bean id="UserAuthenticationProvider" class="com.demo.project.mvc.common.provider.UserAuthenticationProvider"/>
+       <bean id="AuthenticationSuccess" class="com.demo.project.mvc.common.provider.UserAuthenticationSuccess"/>
+       <bean id="CustomLogoutSuccessHandler" class="com.demo.project.mvc.common.provider.CustomLogoutSuccessHandler"/>
+
+</beans>

@@ -1,0 +1,52 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <context:component-scan base-package="com.demo.project.mvc"/>
+
+    <!-- Define route based on Annotation on the controllers -->
+    <mvc:annotation-driven />
+
+    <import resource="resource-beans/db-configuration.xml"/>
+
+    <mvc:resources mapping="/contents/**" location="/contents/"/>
+
+    <!--default viewResolver-->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="prefix" value="/WEB-INF/pages/**"/>-->
+        <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
+
+    <!--Start tiles Configuration-->
+        <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+              p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView"/>
+
+        <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+            <property name="definitions">
+                <list>
+                    <value>/WEB-INF/pages/layouts.xml</value>
+                    <value>/WEB-INF/pages/**/views.xml</value>
+                </list>
+            </property>
+        </bean>
+
+    <bean id="standardPBEStringEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor" />
+
+    <!--End tiles Configuration-->
+
+    <!-- Enable AOP with load time weaving and import aspects -->
+    <!--<aop:aspectj-autoproxy proxy-target-class="true" />-->
+
+</beans>
