@@ -1,6 +1,6 @@
 # Spring-MVC-skeleton
 
-  Demo project for spring MVC learner. custom validator for validation and spring security are also userd to as demo.
+  Demo project for spring MVC learner. custom validator for validation and spring security are also demonstrated.
   
 # Technology Used:
 
